@@ -21,7 +21,7 @@ function reducer(state, action) {
   return state;
 }
 
-const store = createStore(reducer, defaultState); 
+const store = createStore(reducer, defaultState);
 
 function addView(viewFunc) {
   viewFunc(defaultState);
@@ -35,13 +35,14 @@ addView((state) => {
 });
 
 addView((state) => {
-  console.log(`The latest course in the library: ${state.courses[state.courses.length -1].name}`);
+  console.log(`The latest course in the library: ${state.courses[state.courses.length - 1].name}`);
 });
 
-defaultState.courses.push({
-  name: 'This is the new course',
-  topic: 'Really does not matter'
-});
-
-
+store.dispatch({
+  type: 'ADD_COURSE',
+  course: {
+    name: 'This is the new course',
+    topic: 'Really does not matter'
+  }
+})
 
