@@ -1,4 +1,4 @@
-const { createSotre } = require('redux');
+const { createStore } = require('redux');
 
 const defaultState = {
   courses: [
@@ -25,6 +25,9 @@ const store = createStore(reducer, defaultState);
 
 function addView(viewFunc) {
   viewFunc(defaultState);
+  store.subscribe(() => {
+    viewFunc(store.getState());
+  });
 }
 
 addView((state) => {
@@ -39,7 +42,6 @@ defaultState.courses.push({
   name: 'This is the new course',
   topic: 'Really does not matter'
 });
-
 
 
 
